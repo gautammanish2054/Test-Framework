@@ -17,49 +17,34 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
-
-    <dependencies>
+<dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.cucumber</groupId>
-      <artifactId>cucumber-java</artifactId>
-      <version>7.18.0</version>
-    </dependency>
-    <dependency>
-      <groupId>io.cucumber</groupId>
-      <artifactId>cucumber-junit</artifactId>
-      <version>7.18.0</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.testng</groupId>
-      <artifactId>testng</artifactId>
-      <version>7.10.2</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.seleniumhq.selenium</groupId>
-      <artifactId>selenium-java</artifactId>
-      <version>4.21.0</version>
-    </dependency>
- 
-    <!-- https://mvnrepository.com/artifact/net.masterthought/cucumber-reporting -->
-	<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-java</artifactId>
+    <version>7.18.0</version>
+</dependency>
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-junit</artifactId>
+    <version>7.18.0</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-java</artifactId>
+    <version>4.21.0</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/net.masterthought/cucumber-reporting -->
+<dependency>
     <groupId>net.masterthought</groupId>
     <artifactId>cucumber-reporting</artifactId>
     <version>5.8.0</version>
- 	</dependency>
-
+</dependency>
 </dependencies>
 
   <build>
-    <pluginManagement>
-      <plugins>
+	<pluginManagement>
+ <plugins>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
@@ -96,7 +81,33 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+        <plugin>
+   <groupId>net.masterthought</groupId>
+   <artifactId>maven-cucumber-reporting</artifactId>
+   <version>5.8.0</version>
+   <executions>
+     <execution>
+	<id>execution</id>
+	<phase>verify</phase>
+	<goals>
+	    <goal>generate</goal>
+	</goals>
+	<configuration>		
+	<projectName>Framework</projectName>    
+        <skip>false</skip>		
+        <outputDirectory>${project.build.directory}</outputDirectory>	     
+        <inputDirectory>${project.build.directory}</inputDirectory>
+        <jsonFiles>
+          <param>**/*.json</param>
+        </jsonFiles>	
+        <mergeFeaturesById>false</mergeFeaturesById>
+        <mergeFeaturesWithRetest>false</mergeFeaturesWithRetest>
+        <checkBuildResult>false</checkBuildResult>		    			  
+        </configuration>
+   </execution>
+  </executions>
+</plugin>
         </plugins>
-    </pluginManagement>
+        </pluginManagement>
   </build>
 </project>
